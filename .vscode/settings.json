@@ -1,0 +1,7 @@
+{
+    "cmake.sourceDirectory": "E:/VSCODE/UbuntuShare/C/Gobang/Gobang_work/build",
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "ctype.h": "c"
+    }
+}

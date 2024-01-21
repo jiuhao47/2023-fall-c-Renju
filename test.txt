@@ -1,0 +1,25 @@
+    arrayForInnerBoardLayout[0][0] = 1; // 在棋盘的左上角落一个黑色棋子
+    innerLayoutToDisplayArray();        // 将心中的棋盘转成用于显示的棋盘
+    displayBoard();                     // 显示棋盘
+    getchar();
+
+    arrayForInnerBoardLayout[5][9] = 2;
+    innerLayoutToDisplayArray();
+    displayBoard();
+    getchar();
+
+    arrayForInnerBoardLayout[3][4] = 2;
+    innerLayoutToDisplayArray();
+    displayBoard();
+    getchar();
+
+    arrayForInnerBoardLayout[6][1] = 1;
+    innerLayoutToDisplayArray();
+    displayBoard();
+    getchar();
+
+    arrayForInnerBoardLayout[9][4] = 2;
+    innerLayoutToDisplayArray();
+    displayBoard();
+    getchar();
+    return 0;

@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}实验题目}{2}{section.1}%
+\contentsline {section}{\numberline {2}实验概况}{2}{section.2}%
+\contentsline {section}{\numberline {3}实验过程}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}实验平台}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}实验程序}{2}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}整体架构}{2}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}main.c}{3}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}chessboard.c}{4}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}function.c}{4}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}inputprocess.c}{4}{subsubsection.3.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.6}state.c}{4}{subsubsection.3.2.6}%

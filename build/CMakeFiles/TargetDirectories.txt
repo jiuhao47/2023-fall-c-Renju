@@ -1,0 +1,3 @@
+/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/build/CMakeFiles/gobang.dir
+/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/build/CMakeFiles/edit_cache.dir
+/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/build/CMakeFiles/rebuild_cache.dir

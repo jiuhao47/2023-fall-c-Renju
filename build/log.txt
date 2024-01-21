@@ -1,0 +1,14 @@
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/build
+Consolidate compiler generated dependencies of target gobang
+[ 11%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/ai.c.o
+[ 22%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/chessboard.c.o
+[ 33%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/functions.c.o
+[ 44%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/inputprocess.c.o
+[ 55%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/judge.c.o
+[ 66%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/main.c.o
+[ 77%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/player.c.o
+[ 88%] Building C object CMakeFiles/gobang.dir/mnt/hgfs/UbuntuShare/C/Gobang/Gobang_work/src/state.c.o
+[100%] Linking C executable gobang
+[100%] Built target gobang
