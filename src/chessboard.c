@@ -1,6 +1,13 @@
 #include "head.h"
 #include <stdio.h>
-#include <stdlib.h>
+
+// ANSI color codes for board and pieces
+#define COL_RESET "\x1b[0m"
+#define COL_BOARD "\x1b[90m"           // gray for board
+#define COL_BLACK "\x1b[30m"           // black piece
+#define COL_WHITE "\x1b[97m"           // white piece (bright white)
+#define COL_BLACK_CURRENT "\x1b[1;30m" // bold black for current
+#define COL_WHITE_CURRENT "\x1b[1;97m" // bold white for current
 
 // Empty ChessBoard template (initialized at runtime to avoid encoding issues)
 char arrayForEmptyBoard[SIZE][SIZE * CHARSIZE + 1];
@@ -133,16 +140,29 @@ void updatechesscurrent(void) {
   }
 }
 
-// Display ChessBoard
+// Display ChessBoard (with colors)
 void displayBoard(void) {
-  int i;
-  system("clear");
+  // system("clear");
   printf(GAMEINFO);
-  for (int i = 0; i < 15; i++) {
-    printf("%3d %s\n", SIZE - i, arrayForDisplayBoard[i]);
+  for (int i = 0; i < SIZE; i++) {
+    printf("%3d ", SIZE - i);
+    for (int j = 0; j < SIZE; j++) {
+      int base = j * CHARSIZE;
+      int cell = arrayForInnerBoardLayout[i][j];
+      const char *color = COL_BOARD;
+      if (cell == BLACKCHESS || cell == BLACKCHESSCURRENT) {
+        color = (cell == BLACKCHESSCURRENT) ? COL_BLACK_CURRENT : COL_BLACK;
+      } else if (cell == WHITECHESS || cell == WHITECHESSCURRENT) {
+        color = (cell == WHITECHESSCURRENT) ? COL_WHITE_CURRENT : COL_WHITE;
+      }
+      fputs(color, stdout);
+      fwrite(&arrayForDisplayBoard[i][base], 1, CHARSIZE, stdout);
+      fputs(COL_RESET, stdout);
+    }
+    fputc('\n', stdout);
   }
   printf("    ");
-  for (int i = 0; i < 15; i++) {
+  for (int i = 0; i < SIZE; i++) {
     printf("%2c", 'A' + i);
   }
   printf("\n");
