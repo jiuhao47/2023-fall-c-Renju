@@ -62,7 +62,7 @@ extern int arrayForInnerBoardLayout[SIZE][SIZE];
 int displayPosToInnerPos(int tempx, int tempy);
 int mygetline(char s[], int lim);
 int pointInBoard(int tempx, int tempy);
-int mypow(int x, int n);
+long long mypow(int x, int n);
 int weight(int x, int y);
 int mymax(int x, int y);
 int myabs(int x);
@@ -112,7 +112,7 @@ void ai_input(int x, int y);
 void ai_input_clear(int x, int y);
 
 struct Treenode {
-  int score;
+  long long score;
   int x;
   int y;
   int depth;
@@ -127,11 +127,11 @@ void updateInnerBoardForScore(void);
 
 struct Treenode *talloc(void);
 void depthupdate(struct Treenode *root);
-struct Treenode *addSon(int score, int x, int y, struct Treenode *root);
-void addBrother(int score, int x, int y, struct Treenode *root);
+struct Treenode *addSon(long long score, int x, int y, struct Treenode *root);
+void addBrother(long long score, int x, int y, struct Treenode *root);
 void getbrotherScore(struct Treenode *root);
 struct Treenode *treeBrotherSort(struct Treenode *root, struct Treenode *new);
-int sontreeScoreSum(struct Treenode *son);
+long long sontreeScoreSum(struct Treenode *son);
 struct Treenode *treeupdate(struct Treenode *root);
 struct Treenode *freeTree(struct Treenode *root);
 // ai.c
