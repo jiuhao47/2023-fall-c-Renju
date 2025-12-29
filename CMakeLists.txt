@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 project(gobang)
 
+# Generate compile_commands.json
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 aux_source_directory(${PROJECT_BINARY_DIR}/../src SRC_LIST)
 
 include_directories(${PROJECT_BINARY_DIR}/../inc)
