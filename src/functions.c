@@ -1,5 +1,8 @@
 #include "head.h"
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 
 // get an line of characters from the input
 int mygetline(char s[], int lim) {
@@ -27,12 +30,18 @@ int pointInBoard(int tempx, int tempy) {
 int displayPosToInnerPos(int tempx, int tempy) {
   return (SIZE - (tempx)) * SIZE + tempy;
 }
-int mypow(int x, int n) {
-  int temp = 1;
+long long mypow(int x, int n) {
+  long long res = 1;
+  long long lx = x;
+  if (n <= 0)
+    return 1;
   for (int i = 0; i < n; i++) {
-    temp = temp * x;
+    if (lx != 0 && llabs(res) > LLONG_MAX / llabs(lx)) {
+      return LLONG_MAX;
+    }
+    res = res * lx;
   }
-  return temp;
+  return res;
 }
 
 // get weight of different places on the chessboard

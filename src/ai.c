@@ -1,4 +1,5 @@
 #include "head.h"
+#include "log.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,9 +28,9 @@ void init_scoreRoot(struct Treenode **scoreRoot) {
 
 // generate evaluation of chessshape
 void evolve(int depth) {
-  int score = 0;
-  int score_mine = 0;
-  int score_oppo = 0;
+  long long score = 0;
+  long long score_mine = 0;
+  long long score_oppo = 0;
   int attack;
   int defence;
   if (evolveLayers == 0) {
@@ -90,20 +91,22 @@ void evolve(int depth) {
 struct Treenode *collect(struct Treenode *root, struct Treenode **scoreRoot) {
   for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
+      /* skip empty entries */
+      if (scoreRoot[i * SIZE + j] == NULL)
+        continue;
       getbrotherScore(scoreRoot[i * SIZE + j]);
-      // collect every "brother tree"'s score
+      /* collect every "brother tree"'s score and add initial weight */
       scoreRoot[i * SIZE + j]->score =
           scoreRoot[i * SIZE + j]->score + weight(i, j);
-      // add initial weight
+      /* sort and get the maximum point */
       root = treeBrotherSort(root, scoreRoot[i * SIZE + j]);
-      // sort and get the maxmium point
     }
   }
   return root;
 }
 
 // tree-add-brother-node
-void addBrother(int score, int x, int y, struct Treenode *root) {
+void addBrother(long long score, int x, int y, struct Treenode *root) {
   struct Treenode *new;
   new = talloc();
   new->brother = new->son = NULL;
@@ -115,36 +118,28 @@ void addBrother(int score, int x, int y, struct Treenode *root) {
 }
 // sort and get the maxmium point according to the score
 struct Treenode *treeBrotherSort(struct Treenode *root, struct Treenode *new) {
-  struct Treenode *temp = root;
-  struct Treenode *pre = NULL;
-  while (1) {
-    if (root == NULL) {
-      root = new;
-      break;
-    }
-    if (temp != NULL) {
-      if (temp->score <= new->score) {
-        if (pre == NULL) {
-          root = new;
-          break;
-        } else {
-          new->brother = temp;
-          pre->brother = new;
-          break;
-        }
-      } else {
-        pre = temp;
-        temp = temp->brother;
-      }
-    } else {
-      temp = new;
-      break;
-    }
+  if (new == NULL)
+    return root;
+  new->brother = NULL;
+  if (root == NULL) {
+    return new;
   }
+  /* insert at head if new has greater or equal score */
+  if (new->score >= root->score) {
+    new->brother = root;
+    return new;
+  }
+  /* find insertion point */
+  struct Treenode *cur = root;
+  while (cur->brother != NULL && cur->brother->score > new->score) {
+    cur = cur->brother;
+  }
+  new->brother = cur->brother;
+  cur->brother = new;
   return root;
 }
 // tree-add-son-node
-struct Treenode *addSon(int score, int x, int y, struct Treenode *root) {
+struct Treenode *addSon(long long score, int x, int y, struct Treenode *root) {
   if (root == NULL) {
     root = talloc();
     root->depth = 0;
@@ -208,13 +203,15 @@ void getbrotherScore(struct Treenode *root) {
   root->score = root->score + sontreeScoreSum(root->son);
 }
 // collect every "brother tree"'s score (form its son tree)
-int sontreeScoreSum(struct Treenode *son) {
-  int temp = 0;
+long long sontreeScoreSum(struct Treenode *son) {
+  long long temp = 0;
   if (son != NULL) {
-    if (son->score != OCCUPIED)
-      temp = son->score +
-             ((sontreeScoreSum(son->son) + sontreeScoreSum(son->brother)) >>
-              (son->depth + 5));
+    if (son->score != OCCUPIED) {
+      long long childsum =
+          sontreeScoreSum(son->son) + sontreeScoreSum(son->brother);
+      long long decay = 1LL << (son->depth + 5);
+      temp = son->score + (childsum / decay);
+    }
   }
   return temp;
 }
@@ -225,20 +222,21 @@ struct Treenode *talloc(void) {
 
 // main function of ai
 int ai_tree(void) {
-  int max = 0;
   gamestates.playerstate = !gamestates.playerstate;
   init_scoreRoot(scoreRoot[0]);
   evolve(0);
   root = collect(root, scoreRoot[0]);
   pos.x = SIZE - root->x;
   pos.y = root->y;
-  for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j < SIZE; j++) {
-      printf("%5d ", scoreRoot[i][j]->score);
-    }
-    printf("\n");
-  }
+  // for (int i = 0; i < SIZE; i++) {
+  //   for (int j = 0; j < SIZE; j++) {
+  //     log(DEBUG, "%5d ", scoreRoot[i][j]->score);
+  //   }
+  //   log(DEBUG, "\n");
+  // }
   freeTree(root);
+  /* avoid reusing freed global root pointer in subsequent calls */
+  root = NULL;
   ai_input(SIZE - pos.x, pos.y);
   return 0;
 }

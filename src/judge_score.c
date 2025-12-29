@@ -84,7 +84,6 @@ int judge_score(int x, int y, int *Board) {
 // 1:direct four
 int fourjudge_score(int x, int y, int mode, int *chessshape) {
   int count = 0;
-  int fiveshape = 0;
   for (int i = 0; i < 9; i++) {
     if (chessshape[mode * 9 + i] == EMPTY) {
       chessshape[mode * 9 + i] =
