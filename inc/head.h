@@ -1,10 +1,7 @@
 #ifndef _HEAD_H
 #define _HEAD_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+/* Standard headers should be included in source files where needed. */
 
 #define DIRECTION 4         // Four directions
 #define SIZE 15             // ChessBoardSize
@@ -33,15 +30,20 @@
 #define WININFO "%s Win!\n"
 #define AIINFO "    AI SET %c%d    "
 #define PLAYERINFO "Player %s's Turn\n"
-#define GAMEINFO "    -----------Gomoku-----------\n    ----Work of Junyan Jiang----\n"
+#define GAMEINFO                                                               \
+  "    -----------Gomoku-----------\n    ----Work of Junyan Jiang----\n"
 #define LONGCHAIN "Long Chain Detected!\n"
 #define DOUBLETHREE "Double Three Detected!\n"
 #define DOUBLEFOUR "Double Four Detected!\n"
 #define INPUTCHESS_S "\nInput Chess Point:"
-#define INPUTMODE_S "\n(1)Human Vs Human\n(2)Human(Black) Vs AI(White)\n(3)Human(White) Vs AI(BLACK)\n(4)AI Vs AI\n(5)AUTO CHECK\n\nInput Game Mode:"
+#define INPUTMODE_S                                                            \
+  "\n(1)Human Vs Human\n(2)Human(Black) Vs AI(White)\n(3)Human(White) Vs "     \
+  "AI(BLACK)\n(4)AI Vs AI\n(5)AUTO CHECK\n\nInput Game Mode:"
 #define ERROR_OUT_OF_RANGE "Input out of range, Please enter again!\n"
-#define ERROR_ALREDY_HAVE "This place already has chess, Please enter again!\n" // Infomation for display
-#define INPUT_EXAMPLE " MOVE(%d,%d)"                                            // Input example(abandon)
+#define ERROR_ALREDY_HAVE                                                      \
+  "This place already has chess, Please enter again!\n" // Infomation for
+                                                        // display
+#define INPUT_EXAMPLE " MOVE(%d,%d)" // Input example(abandon)
 #define MANUAL "1\n"
 #define HUMANVSAI "2\n"
 #define AIVSHUMAN "3\n"
@@ -69,10 +71,9 @@ int myabs(int x);
 int stateprocess(char line[]);
 void inputprocess_manual(void);
 void inputprocess_auto(void);
-struct point
-{
-    int x;
-    int y;
+struct point {
+  int x;
+  int y;
 };
 extern struct point pos;
 // inputprocess.c
@@ -87,10 +88,9 @@ void input(void);
 void ErrorHandle(void);
 void winHandle(int check);
 void InfoDisplay(void);
-struct gamestate
-{
-    int runningstate;
-    int playerstate;
+struct gamestate {
+  int runningstate;
+  int playerstate;
 };
 extern struct gamestate gamestates;
 
@@ -111,14 +111,13 @@ int ai_tree(void);
 void ai_input(int x, int y);
 void ai_input_clear(int x, int y);
 
-struct Treenode
-{
-    int score;
-    int x;
-    int y;
-    int depth;
-    struct Treenode *son;
-    struct Treenode *brother;
+struct Treenode {
+  int score;
+  int x;
+  int y;
+  int depth;
+  struct Treenode *son;
+  struct Treenode *brother;
 };
 
 void evolve(int depth);
