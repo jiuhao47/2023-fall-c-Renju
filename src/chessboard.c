@@ -1,4 +1,7 @@
 #include "head.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 // Empty ChessBoard template (initialized at runtime to avoid encoding issues)
 char arrayForEmptyBoard[SIZE][SIZE * CHARSIZE + 1];
 // ChessBoard_display
