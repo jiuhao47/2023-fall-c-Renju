@@ -1,5 +1,6 @@
 #include "head.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 // ANSI color codes for board and pieces
 #define COL_RESET "\x1b[0m"
@@ -208,4 +209,5 @@ void updateAiInput(void) {
   displayBoard();
   gamejudger();
   printf(AIINFO, 'A' + pos.y, pos.x);
+  printf("\t(%d,%d)\n", SIZE - pos.x, pos.y);
 }

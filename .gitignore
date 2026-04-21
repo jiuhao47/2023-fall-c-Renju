@@ -4,3 +4,5 @@ test/
 .cache/
 build/
 docs/
+run/
+renju_engine

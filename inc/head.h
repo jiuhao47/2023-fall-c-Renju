@@ -28,7 +28,7 @@
 #define BLACKNAME "Black"
 #define WHITENAME "White"
 #define WININFO "%s Win!\n"
-#define AIINFO "    AI SET %c%d    "
+#define AIINFO "    AI SET %c%d    \n"
 #define PLAYERINFO "Player %s's Turn\n"
 #define GAMEINFO                                                               \
   "    -----------Gomoku-----------\n    ----Work of Junyan Jiang----\n"
